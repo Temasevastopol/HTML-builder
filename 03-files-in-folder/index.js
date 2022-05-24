@@ -1,9 +1,8 @@
 const fs = require ('fs');
 const path = require ('path');
+let fileName ='';
 fs.readdir('secret-folder', (err, data)=>{
-  data.forEach(file => {
-    let fileName ='';
-
+  data.forEach(file => {  
     fs.stat('secret-folder/'+file, (err, stats)=>{
       if(err) throw err;
       if (stats.isFile()){
