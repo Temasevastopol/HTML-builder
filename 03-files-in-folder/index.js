@@ -2,7 +2,7 @@ const fs = require ('fs');
 const path = require ('path');
 let fileName ='';
 fs.readdir('secret-folder', (err, data)=>{
-  data.forEach(file => {  
+  for (let file of data) {  
     fs.stat('secret-folder/'+file, (err, stats)=>{
       if(err) throw err;
       if (stats.isFile()){
@@ -10,5 +10,5 @@ fs.readdir('secret-folder', (err, data)=>{
         console.log(fileName +'     '+ path.extname(file).slice(1) +'        '+ stats.size);
       }   
     });  
-  });
+  }
 });
