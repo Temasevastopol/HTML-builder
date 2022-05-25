@@ -1,7 +1,7 @@
 const fs = require ('fs');
 const path = require ('path');
 let fileName ='';
-fs.readdir('secret-folder', (err, data)=>{
+fs.readdir(path.join(__dirname ,'secret-folder'), (err, data)=>{ 
   for (let file of data) {  
     fs.stat('secret-folder/'+file, (err, stats)=>{
       if(err) throw err;
