@@ -11,7 +11,8 @@ fs.readdir(path.join(__dirname, 'styles'), (err, data)=>{
       stream.on('data', chunk => fileItem += chunk); 
       stream.on('end', ()=>{
         fileItem += '\n';
-        bundleCss.write(fileItem);        
+        bundleCss.write(fileItem);   
+        fileItem='';     
       });
       stream.on('error', error => console.log('error ', error.message));                
     }   
