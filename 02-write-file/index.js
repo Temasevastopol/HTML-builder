@@ -9,19 +9,20 @@ stdout.write('Привет! Напиши что-нибудь - ');
 
 let rl = readline.createInterface({ 
   input: stdin,
-  output: newFile,    
+  output: newFile 
 });
 
 rl.on('line', line => {  
   if (line.toLowerCase() === 'exit') {
     rl.close();
-    stdout.write('Удачи!' + '\n');
+    stdout.write('\n' + 'Удачи!' + '\n');
   } else {
     newFile.write(line + '\n');
+    stdout.write('Я внимательно записываю...');
   }
 });
 
 process.on('SIGINT', () => {
-  stdout.write('Удачи!' + '\n');
+  stdout.write('\n' + 'Удачи!' + '\n');
   rl.close();
 });
