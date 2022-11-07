@@ -7,7 +7,7 @@ let bundleCss = fs.createWriteStream(path.join(__dirname, 'project-dist','bundle
 const readDir = (path) =>{
   return new Promise((resolve,reject) => fs.readdir(path, (err, data) => {  
     if(err){
-      return reject(err.massage);
+      return reject(err.message);
     }    
     resolve(data);     
   }));
