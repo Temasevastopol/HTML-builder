@@ -4,7 +4,7 @@ let fileItem ='';
 
 let bundleCss = fs.createWriteStream(path.join(__dirname, 'project-dist','bundle.css'));
 
-const readDir = async (path) =>{
+const readDir = (path) =>{
   return new Promise((resolve,reject) => fs.readdir(path, (err, data) => {  
     if(err){
       return reject(err.message);
