@@ -4,24 +4,24 @@ const path = require('path');
 
 const componentsPath = path.resolve(__dirname, 'components');
 const outputPath = path.resolve(__dirname, 'project-dist');
+console.log('outputPath = ' + outputPath );
 
-fs.rmdir(outputPath, {recursive: true})
-  .then(() => {
-    fs.mkdir(outputPath, {
-      recursive: true,
-    })
-      .then(mergeStyles())
-      .then(copyAssets())
-      .then(() => fs.readdir(componentsPath))
-      .then((files) =>
-        createHTML(
-          files
-            .filter((file) => path.extname(file) == '.html')
-            .map((file) => file.replace('.html', ''))
-        )
-      );
-  })
-  .catch(err => console.log(err));
+
+fs.mkdir(outputPath, {
+  recursive: true, 
+  force: true
+})
+  .then(mergeStyles())
+  .then(copyAssets())
+  .then(() => fs.readdir(componentsPath))
+  .then((files) =>
+    createHTML(
+      files
+        .filter((file) => path.extname(file) == '.html')
+        .map((file) => file.replace('.html', ''))
+    )
+  );
+
 
 function mergeStyles() {
   const stylesPath = path.resolve(__dirname, 'styles');
