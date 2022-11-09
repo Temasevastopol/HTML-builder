@@ -1,26 +1,38 @@
 const fs = require('fs').promises;
 const { createReadStream, createWriteStream } = require('fs');
 const path = require('path');
+const rimraf = require('rimraf');
+
 
 const componentsPath = path.resolve(__dirname, 'components');
 const outputPath = path.resolve(__dirname, 'project-dist');
-console.log('outputPath = ' + outputPath );
 
 
-fs.mkdir(outputPath, {
-  recursive: true, 
-  force: true
-})
-  .then(mergeStyles())
-  .then(copyAssets())
-  .then(() => fs.readdir(componentsPath))
-  .then((files) =>
-    createHTML(
-      files
-        .filter((file) => path.extname(file) == '.html')
-        .map((file) => file.replace('.html', ''))
-    )
-  );
+// // Delete directory
+rimraf(outputPath, ()=>{
+  console.log('Directory was deleted');
+  makeDir();
+});
+
+
+
+function makeDir(){
+  fs.mkdir(outputPath, {
+    recursive: true, 
+    force: true
+  })
+    .then(mergeStyles())
+    .then(copyAssets())
+    .then(() => fs.readdir(componentsPath))
+    .then((files) =>
+      createHTML(
+        files
+          .filter((file) => path.extname(file) == '.html')
+          .map((file) => file.replace('.html', ''))
+      )
+    );
+}
+
 
 
 function mergeStyles() {
